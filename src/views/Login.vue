@@ -4,7 +4,7 @@ const loginWithGithubURL = `https://github.com/login/oauth/authorize?client_id=$
 </script>
 
 <template>
-  <a :href="loginWithGithubURL">login </a>
+  <a :href="loginWithGithubURL"> <button class="btn btn-accent">login</button> </a>
 </template>
 
 <style scoped></style>

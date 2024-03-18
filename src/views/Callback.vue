@@ -34,8 +34,12 @@ watch(data, () => {
 </script>
 
 <template>
-  <div>in callback</div>
-  <div v-if="isFetching">waiting...</div>
+  <div v-if="isFetching">
+    <span class="loading loading-spinner loading-xs"></span>
+    <span class="loading loading-spinner loading-sm"></span>
+    <span class="loading loading-spinner loading-md"></span>
+    <span class="loading loading-spinner loading-lg"></span>
+  </div>
 </template>
 
 <style scoped></style>
