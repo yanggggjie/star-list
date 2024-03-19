@@ -1,41 +1,45 @@
 <script setup lang="ts">
-import { RouterLink, RouterView, useRoute } from 'vue-router'
+import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
 import { twMerge } from 'tailwind-merge'
+import { computed } from 'vue'
 const route = useRoute()
-const routeList = [
-  {
-    link: '/home',
-    isActive: route.path.startsWith('/home')
-  },
-  {
-    link: '/login',
-    isActive: route.path.startsWith('/login')
-  },
-  {
-    link: '/about',
-    isActive: route.path.startsWith('/about')
-  }
-]
+const router = useRouter()
+const routeList = computed(() => {
+  return [
+    {
+      title: 'Home',
+      href: '/',
+      isActive: route.path === '/'
+    },
+    {
+      title: 'Login',
+      href: '/login',
+      isActive: route.path.startsWith('/login')
+    },
+    {
+      title: 'About',
+      href: '/about',
+      isActive: route.path.startsWith('/about')
+    }
+  ]
+})
+
+function handleTabChange(href: string) {
+  router.push(href)
+}
 </script>
 
 <template>
-  <div :class="twMerge('flex flex-row items-center gap-10')">
-    <div role="tablist" class="tabs tabs-boxed">
-      <a role="tab" class="tab">Tab 1</a>
-      <a role="tab" class="tab tab-active">Tab 2</a>
-      <a role="tab" class="tab">Tab 3</a>
-    </div>
-
-    <RouterLink to="/home">
-      <button class="btn">home</button>
-    </RouterLink>
-
-    <RouterLink to="/about">
-      <button class="btn">about</button>
-    </RouterLink>
-    <RouterLink to="/login">
-      <button class="btn">login</button>
-    </RouterLink>
+  <div role="tablist" class="tabs tabs-boxed">
+    <template v-for="item in routeList" :key="item.href">
+      <button
+        @click="handleTabChange(item.href)"
+        role="tab"
+        :class="twMerge('tab', item.isActive ? 'tab-active' : '')"
+      >
+        {{ item.title }}
+      </button>
+    </template>
   </div>
   <RouterView></RouterView>
 </template>

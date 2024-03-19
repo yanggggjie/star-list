@@ -3,12 +3,13 @@ import { useFetch, useUrlSearchParams } from '@vueuse/core'
 import { useStorage } from '@vueuse/core'
 import { onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import useAccessToken from '@/useApi/useAccessToken'
 
 const params = useUrlSearchParams('history')
 const url = import.meta.env.VITE_BASE_URL + '/api/code2token' + `?code=${params.code}`
 const router = useRouter()
 
-const access_token = useStorage('access_token', '')
+const access_token = useAccessToken()
 
 const { data, isFetching, execute } = useFetch(url, {
   method: 'GET'
