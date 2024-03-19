@@ -1,5 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useGithubFetch } from '@/useApi/useGithubFetch'
+import UserInfo from '@/components/UserInfo.vue'
+</script>
 
 <template>
-  <main></main>
+  <main>
+    <UserInfo></UserInfo>
+  </main>
 </template>
